@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { colors, Box, List, Divider, Grid, Typography } from "@mui/material";
 import logo from "../../assets/img/logo.svg";
 import dashboard from "../../assets/img/dashboard.svg";
@@ -10,17 +10,13 @@ import gear from "../../assets/img/gear.svg";
 import logout from "../../assets/img/logout.svg";
 import warning from "../../assets/img/warning.svg";
 import Item from "./Item";
-import { LOGIN } from "../../routes/path";
+import { CASHIER, DASHBOARD, LOGIN, REPORT, STOCK } from "../../routes/path";
 import Dialog from "../Dialog";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
-
-  const handleNavigate = () => {
-    console.log("navigate");
-  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -34,7 +30,7 @@ const Sidebar = () => {
   };
 
   return (
-    <Grid width={"250px"}>
+    <Grid item width={"250px"} bgcolor={"white"}>
       <Grid container height={"calc(100vh - 35px)"} direction={"column"}>
         <Dialog
           open={open}
@@ -43,35 +39,27 @@ const Sidebar = () => {
           img={warning}
           handleEvent={handleLogout}
         />
-        <Grid container flexDirection={"column"} bgcolor={"white"} flexGrow={1}>
+        <Grid container flexDirection={"column"} flexGrow={1}>
           <Grid item>
             <List sx={{ p: 0 }}>
-              <Item
-                handleEvent={handleNavigate}
-                img={dashboard}
-                label={"Dashboard"}
-              />
+              <Link style={{ textDecoration: "none" }} to={DASHBOARD}>
+                <Item img={dashboard} label={"Dashboard"} />
+              </Link>
             </List>
             <Divider />
             <List sx={{ p: 0 }}>
-              <Item
-                handleEvent={handleNavigate}
-                img={stock}
-                label={"Stock Management"}
-              />
-              <Item
-                handleEvent={handleNavigate}
-                img={reports}
-                label={"Reports"}
-              />
+              <Link style={{ textDecoration: "none" }} to={STOCK}>
+                <Item img={stock} label={"Stock Management"} />
+              </Link>
+              <Link style={{ textDecoration: "none" }} to={REPORT}>
+                <Item img={reports} label={"Reports"} />
+              </Link>
             </List>
             <Divider />
             <List sx={{ p: 0 }}>
-              <Item
-                handleEvent={handleNavigate}
-                img={billing}
-                label={"Cashier"}
-              />
+              <Link style={{ textDecoration: "none" }} to={CASHIER}>
+                <Item img={billing} label={"Cashier"} />
+              </Link>
             </List>
             <Divider />
           </Grid>
@@ -99,7 +87,9 @@ const Sidebar = () => {
           <Grid item>
             <Divider />
             <List sx={{ p: 0 }}>
-              <Item handleEvent={handleNavigate} img={gear} label={"Options"} />
+              <Link style={{ textDecoration: "none" }} to={"#"}>
+                <Item img={gear} label={"Options"} />
+              </Link>
               <Item handleEvent={handleOpen} img={logout} label={"Logout"} />
             </List>
           </Grid>

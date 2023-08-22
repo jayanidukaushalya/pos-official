@@ -3,7 +3,7 @@ import { colors, ListItem, Typography } from "@mui/material";
 type ItemProps = {
   img: string;
   label: string;
-  handleEvent: () => void;
+  handleEvent?: () => void;
 };
 
 const Item = ({ img, label, handleEvent }: ItemProps) => {

@@ -1,7 +1,9 @@
 {
-  "name": "electron",
+  "name": "SaleEase",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "SaleEase Pro is a powerful and user-friendly desktop Point of Sale (POS) system designed to streamline your business operations.",
+  "author": "Jayanidu Kaushalya - https://github.com/jayanidukaushalya",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
@@ -14,6 +16,9 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/lab": "^5.0.0-alpha.140",
     "@mui/material": "^5.14.5",
+    "@mui/system": "^5.14.5",
+    "@mui/x-charts": "^6.0.0-alpha.6",
+    "@mui/x-data-grid": "^6.11.2",
     "axios": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",

@@ -7,6 +7,7 @@ import {
   VscChromeClose,
   VscChromeRestore,
 } from "react-icons/vsc";
+import icon from "../assets/icon.ico";
 
 const Titlebar = () => {
   const [isMaximize, setMaximize] = useState(true);
@@ -48,8 +49,9 @@ const Titlebar = () => {
         px={"10px"}
         alignItems={"center"}
       >
-        <Grid item className="movable-false">
-          <Typography fontSize={"12px"}>POS System</Typography>
+        <Grid item className="movable-false" display={"flex"} gap={"10px"}>
+          <img src={icon} height={"16px"} />
+          <Typography fontSize={"12px"}>SaleEase Pro - V 1.0</Typography>
         </Grid>
         <Grid
           item

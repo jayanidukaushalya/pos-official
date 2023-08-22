@@ -1,9 +1,20 @@
 import { createHashRouter } from "react-router-dom";
 import Root from "../layout/Root";
-import { DASHBOARD, LOGIN, PROTECTED, ROOT } from "./path";
+import {
+  CASHIER,
+  DASHBOARD,
+  LOGIN,
+  PROTECTED,
+  REPORT,
+  ROOT,
+  STOCK,
+} from "./path";
 import Login from "../pages/login";
 import Auth from "../layout/Auth";
 import Dashboard from "../pages/Dashboard";
+import Stock from "../pages/Stock";
+import Report from "../pages/Report";
+import Cashier from "../pages/Cashier";
 
 const Router = createHashRouter([
   {
@@ -21,6 +32,18 @@ const Router = createHashRouter([
           {
             path: DASHBOARD,
             element: <Dashboard />,
+          },
+          {
+            path: STOCK,
+            element: <Stock />,
+          },
+          {
+            path: REPORT,
+            element: <Report />,
+          },
+          {
+            path: CASHIER,
+            element: <Cashier />,
           },
         ],
       },
