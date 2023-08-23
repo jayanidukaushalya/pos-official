@@ -15,7 +15,12 @@ const rows = [
 
 const Table = () => {
   return (
-    <Box sx={{ height: 380, width: "100%", backgroundColor: "white" }}>
+    <Box
+      sx={{
+        height: 380,
+        backgroundColor: "white",
+      }}
+    >
       <DataGrid
         rows={rows}
         columns={columns}
@@ -54,15 +59,6 @@ const columns: GridColDef[] = [
     type: "number",
     width: 110,
     editable: true,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
   },
 ];
 

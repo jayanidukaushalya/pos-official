@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, colors } from "@mui/material";
 import Titlebar from "../components/Titlebar";
 import Sidebar from "../components/sidebar";
 
@@ -8,12 +8,25 @@ type MainLayoutProp = {
 
 const MainLayout = ({ children }: MainLayoutProp) => {
   return (
-    <Grid container direction={"column"} height={"100vh"}>
+    <Grid container direction={"row"} height={"100vh"}>
       <Titlebar />
-      <Grid item>
+      <Grid item xs={12}>
         <Grid container>
           <Sidebar />
-          {children}
+          <Grid
+            item
+            xs={9}
+            lg={10}
+            px={"10px"}
+            py={"10px"}
+            bgcolor={colors.grey[200]}
+            borderRadius={"10px"}
+            flexDirection={"row"}
+            display={"flex"}
+            alignItems={"start"}
+          >
+            {children}
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

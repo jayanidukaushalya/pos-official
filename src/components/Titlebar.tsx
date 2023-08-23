@@ -40,7 +40,7 @@ const Titlebar = () => {
   };
 
   return (
-    <Grid item height={"35px"} width={"100vw"} bgcolor={"white"}>
+    <Grid item height={"35px"} xs={12} bgcolor={"white"}>
       <Grid
         container
         height={"inherit"}

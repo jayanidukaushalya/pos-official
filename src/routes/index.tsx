@@ -4,6 +4,7 @@ import {
   CASHIER,
   DASHBOARD,
   LOGIN,
+  OPTION,
   PROTECTED,
   REPORT,
   ROOT,
@@ -15,6 +16,7 @@ import Dashboard from "../pages/Dashboard";
 import Stock from "../pages/Stock";
 import Report from "../pages/Report";
 import Cashier from "../pages/Cashier";
+import Option from "../pages/Option";
 
 const Router = createHashRouter([
   {
@@ -44,6 +46,10 @@ const Router = createHashRouter([
           {
             path: CASHIER,
             element: <Cashier />,
+          },
+          {
+            path: OPTION,
+            element: <Option />,
           },
         ],
       },
