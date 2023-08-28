@@ -6,7 +6,6 @@ const Root = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("Root");
     navigate(LOGIN);
   }, []);
 

@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { useAuthController } from "./controller/authController";
+import { useProductController } from "./controller/productController";
 
 function startExpress() {
   const app = express();
@@ -9,7 +10,8 @@ function startExpress() {
   app.use(cors());
   app.use(express.json());
 
-  app.use("/", useAuthController);
+  app.use("/auth", useAuthController);
+  app.use("/product", useProductController);
 
   app.listen(port, () => {
     console.log(`Express server is running on port ${port}`);

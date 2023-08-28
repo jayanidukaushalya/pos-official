@@ -64,7 +64,6 @@ const Login = () => {
   const onSubmit = async (data: Form) => {
     setIsLoading(true);
     try {
-      console.log(data);
       const response = await request.post("/auth/login", JSON.stringify(data));
 
       if (response.status == 200) {
@@ -83,17 +82,15 @@ const Login = () => {
         const errorMessage = axiosError?.response?.data?.message;
 
         if (errorMessage) {
-          setIsError(true);
           setErrorMessage(errorMessage?.toString());
         } else {
-          setIsError(true);
           setErrorMessage("An unknown error occurred.");
         }
       } else {
         console.log("Non-Axios error occurred:", error);
-        setIsError(true);
         setErrorMessage("An unexpected error occurred.");
       }
+      setIsError(true);
     } finally {
       setIsLoading(false);
     }

@@ -50,13 +50,13 @@ function createWindow() {
 
   ipcMain.on("resize-true", () => {
     win?.setResizable(true);
-    win?.setMinimumSize(1000, 600);
+    win?.setMinimumSize(1000, 700);
   });
 
   // window size
 
   ipcMain.on("change-window-size-1000-600", () => {
-    win?.setSize(1000, 600);
+    win?.setSize(1000, 700);
     win?.center();
   });
 

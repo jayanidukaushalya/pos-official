@@ -6,15 +6,7 @@ import Table from "../../components/table/Table";
 
 const Container = () => {
   return (
-    <Grid
-      container
-      maxHeight={"calc(100vh - 60px)"}
-      overflow={"auto"}
-      direction={"row"}
-      borderRadius={"10px"}
-      alignItems={"center"}
-      justifyContent={"space-between"}
-    >
+    <Grid container alignItems={"center"} justifyContent={"space-between"}>
       <Grid item xs={12} lg={5.9}>
         <Grid container direction={"row"}>
           <Grid item xs={6}>

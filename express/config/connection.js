@@ -4,7 +4,7 @@ const pool = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "Hello@14385",
-  database: "afzal",
+  database: "sale_ease",
   waitForConnections: true,
   connectionLimit: 1,
 });
@@ -12,10 +12,8 @@ const pool = mysql.createPool({
 async function iud(query, array) {
   try {
     console.log("Trying to iud data");
-    const [result] = await pool.execute(query, [array]);
-    console.log("Inserted ID:", result.insertId);
-  } catch (error) {
-    console.error("Error inserting data:", error);
+    const data = await pool.execute(query, array);
+    console.log("Inserted ID:", data);
   } finally {
     pool.releaseConnection();
   }
@@ -27,8 +25,6 @@ async function search(query, array) {
     const data = await pool.execute(query, array);
     console.log("Search results:", data);
     return data;
-  } catch (error) {
-    console.error("Error searching data:", error);
   } finally {
     pool.releaseConnection();
   }

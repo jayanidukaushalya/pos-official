@@ -51,8 +51,8 @@ const Sidebar = () => {
   };
 
   return (
-    <Grid item xs={3} lg={2} bgcolor={"white"}>
-      <Grid container height={"calc(100vh - 35px)"} direction={"column"}>
+    <Grid item width={"260px"} height={"inherit"} bgcolor={"white"}>
+      <Grid container height={"inherit"} direction={"column"}>
         <Dialog
           open={open}
           setOpen={setOpen}

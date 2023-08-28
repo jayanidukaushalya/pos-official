@@ -21,6 +21,7 @@ function MyLoadingButton({
   return (
     <Box>
       <LoadingButton
+        sx={{ opacity: 0.8 }}
         color="warning"
         size="small"
         loading={isLoading}

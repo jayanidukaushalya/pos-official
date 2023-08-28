@@ -1,24 +1,64 @@
-import Box from "@mui/material/Box";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { useEffect, useState, useContext } from "react";
+import { DataGrid, GridRowId } from "@mui/x-data-grid";
+import request from "../../config/axios";
+import { Box } from "@mui/material";
+import { ProductUpdateContext } from "../../context/ProductUpdateContext";
+import DeleteProduct from "../Dialog/DeleteProduct";
+import UpdateProduct from "../Dialog/UpdateProduct";
+import useProductTableColumns from "./columns/ProductTable";
 
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
+type FetchData = { name: string; id: number };
 
 const Table = () => {
+  const [rows, setRows] = useState([]);
+  const [id, setId] = useState<GridRowId | null>(null);
+  const [name, setName] = useState("");
+  const [openDelete, setOpenDelete] = useState(false);
+  const [openUpdate, setOpenUpdate] = useState(false);
+
+  const { notify } = useContext(ProductUpdateContext);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const {
+          data: { data },
+        } = await request.get("product/search");
+
+        const update = data.map((product: FetchData, index: number) => ({
+          index: index + 1,
+          internalId: product.id,
+          productName: product.name,
+        }));
+
+        setRows(update);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetch();
+  }, [notify]);
+
+  const handleDelete = (id: GridRowId) => {
+    setId(id);
+    setOpenDelete(true);
+  };
+
+  const handleUpdate = async (id: GridRowId, name: string) => {
+    setId(id);
+    setName(name);
+    setOpenUpdate(true);
+  };
+
+  const { columns } = useProductTableColumns({ handleUpdate, handleDelete });
+
   return (
     <Box
       sx={{
-        height: 380,
+        width: "100%",
         backgroundColor: "white",
+        display: "flex",
       }}
     >
       <DataGrid
@@ -27,39 +67,25 @@ const Table = () => {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 10,
             },
           },
         }}
-        pageSizeOptions={[5]}
-        checkboxSelection
+        getRowId={(row) => row.internalId}
+        pageSizeOptions={[10]}
         disableRowSelectionOnClick
+        checkboxSelection
+        autoHeight
+      />
+      <DeleteProduct open={openDelete} setOpen={setOpenDelete} id={id} />
+      <UpdateProduct
+        open={openUpdate}
+        setOpen={setOpenUpdate}
+        id={id}
+        name={name}
       />
     </Box>
   );
 };
-
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "firstName",
-    headerName: "First name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "lastName",
-    headerName: "Last name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 110,
-    editable: true,
-  },
-];
 
 export default Table;

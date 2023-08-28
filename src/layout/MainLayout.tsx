@@ -10,22 +10,28 @@ const MainLayout = ({ children }: MainLayoutProp) => {
   return (
     <Grid container direction={"row"} height={"100vh"}>
       <Titlebar />
-      <Grid item xs={12}>
-        <Grid container>
+      <Grid item xs={12} height={"calc(100vh - 35px)"}>
+        <Grid container height={"inherit"}>
           <Sidebar />
           <Grid
             item
-            xs={9}
-            lg={10}
-            px={"10px"}
-            py={"10px"}
+            height={"inherit"}
+            width={"calc(100vw - 280px)"}
+            overflow={"auto"}
             bgcolor={colors.grey[200]}
             borderRadius={"10px"}
-            flexDirection={"row"}
-            display={"flex"}
-            alignItems={"start"}
           >
-            {children}
+            <Grid
+              borderRadius={"10px"}
+              width={"calc(100vw - 280px)"}
+              maxHeight={"calc(100vh - 55px)"}
+              overflow={"auto"}
+              bgcolor={colors.grey[200]}
+              px={"10px"}
+              py={"10px"}
+            >
+              {children}
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

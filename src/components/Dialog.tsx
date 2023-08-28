@@ -35,7 +35,6 @@ const Dialog = ({ open, setOpen, title, img, handleEvent }: DialogProps) => {
       <MuiDialog
         open={open}
         TransitionComponent={Transition}
-        keepMounted
         onClose={handleClose}
       >
         <DialogTitle>{title}</DialogTitle>
