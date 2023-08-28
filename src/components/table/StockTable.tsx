@@ -17,12 +17,22 @@ type Stock = {
   status: number;
 };
 
+type StockTableColumns = {
+  index: number;
+  internalId: number;
+  register: Date;
+  warranty: Date;
+  buyingPrice: number;
+  sellingPrice: number;
+  qty: number;
+};
+
 type StockTable = {
   stock: Stock[];
 };
 
 const StockTable = ({ stock }: StockTable) => {
-  const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState<Array<StockTableColumns>>([]);
   const [id, setId] = useState<GridRowId | null>(null);
   const [name, setName] = useState("");
   const [openDelete, setOpenDelete] = useState(false);
