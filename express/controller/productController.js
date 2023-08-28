@@ -1,9 +1,8 @@
 import express from "express";
+import { iud, search } from "../config/connection";
 import { productInsertion } from "../validations/productInsertValidation";
 import { validationMiddleware } from "../middleware/validationMiddleware";
-import { iud, search } from "../config/connection";
 import { checkProductDuplication } from "../middleware/checkProductDuplication";
-import { pool } from "../config/connection";
 
 const router = express.Router();
 

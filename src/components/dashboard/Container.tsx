@@ -2,7 +2,7 @@ import { Grid, Paper } from "@mui/material";
 import Card from "../../components/Card";
 import Bars from "../../components/charts/Bars";
 import Pie from "../../components/charts/Pie";
-import Table from "../../components/table/Table";
+import Table from "../table/ProductTable";
 
 const Container = () => {
   return (

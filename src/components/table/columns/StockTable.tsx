@@ -3,7 +3,7 @@ import { GridColDef } from "@mui/x-data-grid";
 import { FaTrashCan, FaPenToSquare } from "react-icons/fa6";
 import { TableColumnsProps } from "./types";
 
-const useProductTableColumns = ({
+const useStockTableColumns = ({
   handleUpdate,
   handleDelete,
 }: TableColumnsProps) => {
@@ -16,13 +16,45 @@ const useProductTableColumns = ({
       align: "center",
     },
     {
-      field: "productName",
-      headerName: "Product name",
+      field: "register",
+      headerName: "Register Date",
+      type: "date",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "warranty",
+      headerName: "Warranty",
+      type: "date",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "buyingPrice",
+      headerName: "Buying Price (Rs)",
+      type: "number",
+      flex: 1,
+    },
+    {
+      field: "sellingPrice",
+      headerName: "Selling Price (Rs)",
+      type: "number",
+      flex: 1,
+    },
+    {
+      field: "qty",
+      headerName: "Quantity",
+      type: "number",
       flex: 1,
     },
     {
       field: "options",
       headerName: "Options",
+      flex: 1,
+      headerAlign: "center",
+
       disableColumnMenu: true,
       sortable: false,
       renderCell: (params) => {
@@ -35,6 +67,7 @@ const useProductTableColumns = ({
               gap: "10px",
               width: "100%",
               opacity: 0.8,
+              justifyContent: "center",
             }}
           >
             <IconButton
@@ -64,4 +97,4 @@ const useProductTableColumns = ({
   return { columns };
 };
 
-export default useProductTableColumns;
+export default useStockTableColumns;

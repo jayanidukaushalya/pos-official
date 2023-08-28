@@ -27,6 +27,7 @@ import {
   DASHBOARD,
   LOGIN,
   OPTION,
+  PRODUCT,
   REPORT,
   STOCK,
 } from "../../routes/path";
@@ -109,6 +110,13 @@ const Sidebar = () => {
                   img={stock}
                   label={"Stock Management"}
                   pathname={pathname.includes(STOCK)}
+                />
+              </Link>
+              <Link style={{ textDecoration: "none" }} to={PRODUCT}>
+                <Item
+                  img={stock}
+                  label={"Product Management"}
+                  pathname={pathname.includes(PRODUCT)}
                 />
               </Link>
               <Link style={{ textDecoration: "none" }} to={REPORT}>

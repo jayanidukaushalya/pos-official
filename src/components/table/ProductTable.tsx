@@ -9,7 +9,7 @@ import useProductTableColumns from "./columns/ProductTable";
 
 type FetchData = { name: string; id: number };
 
-const Table = () => {
+const ProductTable = () => {
   const [rows, setRows] = useState([]);
   const [id, setId] = useState<GridRowId | null>(null);
   const [name, setName] = useState("");
@@ -74,7 +74,6 @@ const Table = () => {
         getRowId={(row) => row.internalId}
         pageSizeOptions={[10]}
         disableRowSelectionOnClick
-        checkboxSelection
         autoHeight
       />
       <DeleteProduct open={openDelete} setOpen={setOpenDelete} id={id} />
@@ -88,4 +87,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default ProductTable;
