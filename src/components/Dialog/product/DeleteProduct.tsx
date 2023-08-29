@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Dialog,
   DialogActions,
@@ -7,11 +6,11 @@ import {
   DialogContentText,
   Button,
 } from "@mui/material";
-import SnackBarAlert from "../alert/SnackBarAlert";
-import MyLoadingButton from "../button/MyLoadingButton";
-import { useProductDelete } from "../../hook/productDelete";
-import { ProductProps } from "./productTypes";
-import { Transition } from "./Dialog.styles";
+import SnackBarAlert from "../../alert/SnackBarAlert";
+import MyLoadingButton from "../../button/MyLoadingButton";
+import { useProductDelete } from "../../../hook/product/productDelete";
+import { Transition } from "../Dialog.styles";
+import { ProductProps } from "../../../types";
 
 const DeleteProduct = ({ open, setOpen, id }: ProductProps) => {
   const handleClose = () => {
@@ -37,7 +36,7 @@ const DeleteProduct = ({ open, setOpen, id }: ProductProps) => {
         TransitionComponent={Transition}
       >
         <form onSubmit={onSubmit}>
-          <DialogTitle>{"Waning !"}</DialogTitle>
+          <DialogTitle>{"Warning !"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Are you sure, Do you really want to delete this product from the
@@ -75,7 +74,7 @@ const DeleteProduct = ({ open, setOpen, id }: ProductProps) => {
       <SnackBarAlert
         isError={isSuccess}
         setterFunction={setIsSuccess}
-        message="Product updated successfully !"
+        message="Product deleted successfully !"
         severity={"success"}
         variant={"filled"}
       />

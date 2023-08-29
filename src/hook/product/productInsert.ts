@@ -1,13 +1,19 @@
-import { useContext, useState } from "react";
-import request from "../config/axios";
-import { ProductUpdateContext } from "../context/ProductUpdateContext";
+import { useState, useContext } from "react";
 import axios, { AxiosError } from "axios";
-import {
-  AxiosResponse,
-  UseProductProps,
-} from "../components/Dialog/productTypes";
+import { ProductUpdateContext } from "../../context/ProductUpdateContext";
+import request from "../../config/axios";
+import { AxiosResponse } from "../../types";
 
-const useProductDelete = ({ handleClose, id }: UseProductProps) => {
+type Form = {
+  name: string;
+};
+
+type UseProductProps = {
+  handleClose: () => void;
+  reset: () => void;
+};
+
+const useProductInsert = ({ reset, handleClose }: UseProductProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -15,22 +21,22 @@ const useProductDelete = ({ handleClose, id }: UseProductProps) => {
 
   const { handleNotify } = useContext(ProductUpdateContext);
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: Form) => {
     setIsLoading(true);
-
     try {
-      const response = await request.put(`/product/delete/${id}`);
+      const response = await request.post("/product/add", JSON.stringify(data));
 
-      if (response.status == 200) {
+      if (response.status == 201) {
+        console.log(response.data.message);
         setIsError(false);
         setIsSuccess(true);
+        reset();
         handleNotify();
         handleClose();
       }
     } catch (error) {
       setIsSuccess(false);
       if (axios.isAxiosError(error)) {
-        console.log(error);
         const axiosError = error as AxiosError<AxiosResponse>;
         const errorMessage = axiosError?.response?.data?.message;
 
@@ -54,10 +60,10 @@ const useProductDelete = ({ handleClose, id }: UseProductProps) => {
     isError,
     isSuccess,
     errorMessage,
+    onSubmit,
     setIsError,
     setIsSuccess,
-    onSubmit,
   };
 };
 
-export { useProductDelete };
+export default useProductInsert;

@@ -14,6 +14,7 @@ import {
 import logo from "../../assets/img/logo.svg";
 import dashboard from "../../assets/img/dashboard.svg";
 import stock from "../../assets/img/stock.svg";
+import product from "../../assets/img/product.svg";
 import reports from "../../assets/img/reports.svg";
 import billing from "../../assets/img/billing.svg";
 import gear from "../../assets/img/gear.svg";
@@ -114,7 +115,7 @@ const Sidebar = () => {
               </Link>
               <Link style={{ textDecoration: "none" }} to={PRODUCT}>
                 <Item
-                  img={stock}
+                  img={product}
                   label={"Product Management"}
                   pathname={pathname.includes(PRODUCT)}
                 />

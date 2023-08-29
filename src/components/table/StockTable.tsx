@@ -1,13 +1,13 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { DataGrid, GridRowId } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
-import { ProductUpdateContext } from "../../context/ProductUpdateContext";
-import DeleteProduct from "../Dialog/DeleteProduct";
-import UpdateProduct from "../Dialog/UpdateProduct";
 import useStockTableColumns from "./columns/StockTable";
+import DeleteStock from "../Dialog/stock/DeleteStock";
+import ViewBarcode from "../Dialog/stock/ViewBarcode";
 
 type Stock = {
   id: number;
+  barcode: string;
   product_id: number;
   bprice: number;
   sprice: number;
@@ -19,6 +19,7 @@ type Stock = {
 
 type StockTableColumns = {
   index: number;
+  barcode: string;
   internalId: number;
   register: Date;
   warranty: Date;
@@ -34,7 +35,8 @@ type StockTable = {
 const StockTable = ({ stock }: StockTable) => {
   const [rows, setRows] = useState<Array<StockTableColumns>>([]);
   const [id, setId] = useState<GridRowId | null>(null);
-  const [name, setName] = useState("");
+  const [barcode, setBarcode] = useState("");
+  const [openBarocde, setOpenBarcode] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
 
@@ -42,6 +44,7 @@ const StockTable = ({ stock }: StockTable) => {
     const update = stock.map((item: Stock, index: number) => ({
       index: index + 1,
       internalId: item.id,
+      barcode: item.barcode,
       register: item.register_date,
       warranty: item.warranty,
       buyingPrice: item.bprice,
@@ -52,7 +55,12 @@ const StockTable = ({ stock }: StockTable) => {
     setRows(update);
   }, [stock]);
 
-  const { notify } = useContext(ProductUpdateContext);
+  const handleViewBarcode = (id: GridRowId, barcode: string) => {
+    setId(id);
+    setBarcode(barcode);
+    setOpenBarcode(true);
+  };
+
   const handleDelete = (id: GridRowId) => {
     setId(id);
     setOpenDelete(true);
@@ -60,11 +68,14 @@ const StockTable = ({ stock }: StockTable) => {
 
   const handleUpdate = async (id: GridRowId, name: string) => {
     setId(id);
-    setName(name);
     setOpenUpdate(true);
   };
 
-  const { columns } = useStockTableColumns({ handleUpdate, handleDelete });
+  const { columns } = useStockTableColumns({
+    handleUpdate,
+    handleDelete,
+    handleViewBarcode,
+  });
 
   return (
     <Box
@@ -89,13 +100,12 @@ const StockTable = ({ stock }: StockTable) => {
         disableRowSelectionOnClick
         autoHeight
       />
-      <DeleteProduct open={openDelete} setOpen={setOpenDelete} id={id} />
-      <UpdateProduct
-        open={openUpdate}
-        setOpen={setOpenUpdate}
-        id={id}
-        name={name}
+      <ViewBarcode
+        open={openBarocde}
+        setOpen={setOpenBarcode}
+        barcode={barcode}
       />
+      <DeleteStock open={openDelete} setOpen={setOpenDelete} id={id} />
     </Box>
   );
 };

@@ -3,9 +3,8 @@ import { Grid, Box, Button, Typography, colors } from "@mui/material";
 import MainLayout from "../layout/MainLayout";
 import { FaPlus } from "react-icons/fa";
 import ProductTable from "../components/table/ProductTable";
-import AddProduct from "../components/Dialog/AddProduct";
+import AddProduct from "../components/Dialog/product/AddProduct";
 import { ProductUpdateContext } from "../context/ProductUpdateContext";
-import StockTable from "../components/table/StockTable";
 
 const Product = () => {
   const [notify, setNotify] = useState(false);

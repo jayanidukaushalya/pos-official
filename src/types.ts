@@ -7,14 +7,8 @@ type ProductProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-type UseProductProps = {
-  reset: () => void;
-  handleClose: () => void;
-  id?: GridRowId | null;
-};
-
 type AxiosResponse = {
   message: string;
 };
 
-export type { ProductProps, UseProductProps, AxiosResponse };
+export type { ProductProps, AxiosResponse };

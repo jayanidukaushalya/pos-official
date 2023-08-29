@@ -1,17 +1,21 @@
-import { useState, useContext } from "react";
-import request from "../config/axios";
+import { useContext, useState } from "react";
 import axios, { AxiosError } from "axios";
-import { ProductUpdateContext } from "../context/ProductUpdateContext";
-import {
-  AxiosResponse,
-  UseProductProps,
-} from "../components/Dialog/productTypes";
+import { ProductUpdateContext } from "../../context/ProductUpdateContext";
+import request from "../../config/axios";
+import { GridRowId } from "@mui/x-data-grid";
+import { AxiosResponse } from "../../types";
 
 type Form = {
   name: string;
 };
 
-const useProductInsert = ({ reset, handleClose }: UseProductProps) => {
+type UseProductProps = {
+  reset: () => void | undefined;
+  handleClose: () => void;
+  id?: GridRowId | null;
+};
+
+const useProductUpdate = ({ reset, handleClose, id }: UseProductProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -22,9 +26,12 @@ const useProductInsert = ({ reset, handleClose }: UseProductProps) => {
   const onSubmit = async (data: Form) => {
     setIsLoading(true);
     try {
-      const response = await request.post("/product/add", JSON.stringify(data));
+      const response = await request.put(
+        `/product/update/${id}`,
+        JSON.stringify(data)
+      );
 
-      if (response.status == 201) {
+      if (response.status == 200) {
         console.log(response.data.message);
         setIsError(false);
         setIsSuccess(true);
@@ -58,10 +65,10 @@ const useProductInsert = ({ reset, handleClose }: UseProductProps) => {
     isError,
     isSuccess,
     errorMessage,
-    onSubmit,
     setIsError,
     setIsSuccess,
+    onSubmit,
   };
 };
 
-export default useProductInsert;
+export default useProductUpdate;

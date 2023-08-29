@@ -7,11 +7,11 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import MyLoadingButton from "../button/MyLoadingButton";
-import SnackBarAlert from "../alert/SnackBarAlert";
-import useProductInsert from "../../hook/productInsert";
-import { ProductProps } from "./productTypes";
-import { Transition } from "./Dialog.styles";
+import MyLoadingButton from "../../button/MyLoadingButton";
+import SnackBarAlert from "../../alert/SnackBarAlert";
+import { Transition } from "../Dialog.styles";
+import useProductInsert from "../../../hook/product/productInsert";
+import { ProductProps } from "../../../types";
 
 const AddProductDialog = ({ open, setOpen }: ProductProps) => {
   const handleClose = () => {
@@ -49,15 +49,15 @@ const AddProductDialog = ({ open, setOpen }: ProductProps) => {
         TransitionComponent={Transition}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <DialogTitle>Add new product</DialogTitle>
+          <DialogTitle>New Product</DialogTitle>
           <DialogContent>
             <Box sx={{ p: "20px" }}>
               <TextField
                 error={!!errors.name}
+                color="warning"
                 fullWidth
                 label="Product Name"
                 variant="outlined"
-                size="small"
                 {...register("name", {
                   required: {
                     value: true,

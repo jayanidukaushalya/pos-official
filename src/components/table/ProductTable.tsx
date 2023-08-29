@@ -3,9 +3,9 @@ import { DataGrid, GridRowId } from "@mui/x-data-grid";
 import request from "../../config/axios";
 import { Box } from "@mui/material";
 import { ProductUpdateContext } from "../../context/ProductUpdateContext";
-import DeleteProduct from "../Dialog/DeleteProduct";
-import UpdateProduct from "../Dialog/UpdateProduct";
 import useProductTableColumns from "./columns/ProductTable";
+import DeleteProduct from "../Dialog/product/DeleteProduct";
+import UpdateProduct from "../Dialog/product/UpdateProduct";
 
 type FetchData = { name: string; id: number };
 

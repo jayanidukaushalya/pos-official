@@ -1,12 +1,12 @@
 import { createContext } from "react";
 
-type ProductAddedNotificationProps = {
+type ProductUpdatedNotificationProps = {
   notify: boolean;
   handleNotify: () => void;
 };
 
 export const ProductUpdateContext =
-  createContext<ProductAddedNotificationProps>({
+  createContext<ProductUpdatedNotificationProps>({
     notify: false,
     handleNotify: () => {
       // TODO: Implement handleNotify functionality

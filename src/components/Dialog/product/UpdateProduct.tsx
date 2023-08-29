@@ -8,11 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import MyLoadingButton from "../button/MyLoadingButton";
-import SnackBarAlert from "../alert/SnackBarAlert";
-import useProductUpdate from "../../hook/productUpdate";
-import { ProductProps } from "./productTypes";
-import { Transition } from "./Dialog.styles";
+import { Transition } from "../Dialog.styles";
+import MyLoadingButton from "../../button/MyLoadingButton";
+import SnackBarAlert from "../../alert/SnackBarAlert";
+import useProductUpdate from "../../../hook/product/productUpdate";
+import { ProductProps } from "../../../types";
 
 const UpdateProduct = ({ open, setOpen, id, name }: ProductProps) => {
   const handleClose = () => {
@@ -50,7 +50,7 @@ const UpdateProduct = ({ open, setOpen, id, name }: ProductProps) => {
         TransitionComponent={Transition}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <DialogTitle>Update product details</DialogTitle>
+          <DialogTitle>Update Product</DialogTitle>
           <DialogContent>
             <Box
               sx={{
@@ -63,6 +63,7 @@ const UpdateProduct = ({ open, setOpen, id, name }: ProductProps) => {
               <Typography>Current product name: {name}</Typography>
               <TextField
                 error={!!errors.name}
+                color="warning"
                 fullWidth
                 label="New Product Name"
                 variant="outlined"

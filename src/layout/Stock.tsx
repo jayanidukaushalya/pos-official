@@ -4,6 +4,8 @@ import { FaPlus } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import { STOCK } from "../routes/path";
 import { FaArrowLeft } from "react-icons/fa6";
+import AddNewStock from "../components/Dialog/stock/AddNewStock";
+import { useState } from "react";
 
 type Stock = {
   children: React.ReactNode;
@@ -11,6 +13,11 @@ type Stock = {
 
 const StockLayout = ({ children }: Stock) => {
   const { id } = useParams();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   return (
     <MainLayout>
@@ -63,6 +70,7 @@ const StockLayout = ({ children }: Stock) => {
                   }}
                   variant="contained"
                   color="warning"
+                  onClick={handleOpen}
                 >
                   Add new stock
                 </Button>
@@ -74,6 +82,7 @@ const StockLayout = ({ children }: Stock) => {
           {children}
         </Grid>
       </Grid>
+      <AddNewStock open={open} setOpen={setOpen} />
     </MainLayout>
   );
 };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Grid, Box, Button, Typography, colors } from "@mui/material";
+import { Grid } from "@mui/material";
 import Card from "../../components/Card";
 import request from "../../config/axios";
 import StockLayout from "../../layout/Stock";
@@ -15,20 +15,19 @@ type Product = {
 const Stock = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
-  const fetch = async () => {
-    try {
-      const {
-        data: { data },
-      } = await request.get("product/search");
-
-      setProducts(data);
-      console.log(products);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetch = async () => {
+      try {
+        const {
+          data: { data },
+        } = await request.get("product/search");
+
+        setProducts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetch();
   }, []);
 
@@ -37,12 +36,12 @@ const Stock = () => {
       <Grid container>
         {products.map((item, key) => {
           return (
-            <Grid item xs={3}>
+            <Grid key={key} item xs={3}>
               <Link
                 style={{ textDecoration: "none" }}
                 to={`${STOCK}/${item.id}`}
               >
-                <Card key={key} description="Test" title={item.name} />
+                <Card description="Test" title={item.name} />
               </Link>
             </Grid>
           );

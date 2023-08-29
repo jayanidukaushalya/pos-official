@@ -1,4 +1,4 @@
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Tooltip, Zoom } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import { FaTrashCan, FaPenToSquare } from "react-icons/fa6";
 import { TableColumnsProps } from "./types";
@@ -35,26 +35,39 @@ const useProductTableColumns = ({
               gap: "10px",
               width: "100%",
               opacity: 0.8,
+              justifyContent: "center",
             }}
           >
-            <IconButton
-              onClick={() => {
-                handleUpdate(id, name);
-              }}
-              size="small"
-              color="info"
+            <Tooltip
+              title="Update Stock"
+              TransitionComponent={Zoom}
+              TransitionProps={{ timeout: 200 }}
             >
-              <FaPenToSquare />
-            </IconButton>
-            <IconButton
-              onClick={() => {
-                handleDelete(id);
-              }}
-              size="small"
-              color="error"
+              <IconButton
+                onClick={() => {
+                  handleUpdate(id, name);
+                }}
+                size="small"
+                color="info"
+              >
+                <FaPenToSquare />
+              </IconButton>
+            </Tooltip>
+            <Tooltip
+              title="Delete Stock"
+              TransitionComponent={Zoom}
+              TransitionProps={{ timeout: 200 }}
             >
-              <FaTrashCan />
-            </IconButton>
+              <IconButton
+                onClick={() => {
+                  handleDelete(id);
+                }}
+                size="small"
+                color="error"
+              >
+                <FaTrashCan />
+              </IconButton>
+            </Tooltip>
           </Box>
         );
       },

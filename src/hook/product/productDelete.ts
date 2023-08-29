@@ -1,17 +1,16 @@
 import { useContext, useState } from "react";
-import { ProductUpdateContext } from "../context/ProductUpdateContext";
-import request from "../config/axios";
+import request from "../../config/axios";
+import { ProductUpdateContext } from "../../context/ProductUpdateContext";
 import axios, { AxiosError } from "axios";
-import {
-  AxiosResponse,
-  UseProductProps,
-} from "../components/Dialog/productTypes";
+import { GridRowId } from "@mui/x-data-grid";
+import { AxiosResponse } from "../../types";
 
-type Form = {
-  name: string;
+type UseProductProps = {
+  handleClose: () => void;
+  id?: GridRowId | null;
 };
 
-const useProductUpdate = ({ reset, handleClose, id }: UseProductProps) => {
+const useProductDelete = ({ handleClose, id }: UseProductProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -19,25 +18,22 @@ const useProductUpdate = ({ reset, handleClose, id }: UseProductProps) => {
 
   const { handleNotify } = useContext(ProductUpdateContext);
 
-  const onSubmit = async (data: Form) => {
+  const onSubmit = async () => {
     setIsLoading(true);
+
     try {
-      const response = await request.put(
-        `/product/update/${id}`,
-        JSON.stringify(data)
-      );
+      const response = await request.put(`/product/delete/${id}`);
 
       if (response.status == 200) {
-        console.log(response.data.message);
         setIsError(false);
         setIsSuccess(true);
-        reset();
         handleNotify();
         handleClose();
       }
     } catch (error) {
       setIsSuccess(false);
       if (axios.isAxiosError(error)) {
+        console.log(error);
         const axiosError = error as AxiosError<AxiosResponse>;
         const errorMessage = axiosError?.response?.data?.message;
 
@@ -67,4 +63,4 @@ const useProductUpdate = ({ reset, handleClose, id }: UseProductProps) => {
   };
 };
 
-export default useProductUpdate;
+export { useProductDelete };
